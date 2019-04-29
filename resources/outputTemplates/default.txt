@@ -1,0 +1,3 @@
+░▒▓▓█ Executed on ${host} by ${user} at ${start_time} for ${duration_in_seconds} seconds against resource ${resource_path} ▒░░ ░
+░▒▓██ ${message} ▒▒░ ░░
+

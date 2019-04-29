@@ -1,0 +1,37 @@
+<idea-plugin url="https://github.com/davidjgonzalez">
+
+    <name>AEM Script Console</name>
+    <id>com.github.davidjgonzalez.intellij.aemscriptconsole</id>
+    <version>1.0.0</version>
+
+    <vendor email="davidjgonzalez@gmail.com"
+            url="https://github.com/davidjgonzalez">David Gonzalez
+    </vendor>
+
+    <description><![CDATA[
+        AEM Script Console is an IntelliJ run configuration that sends the active IntelliJ document to AEM which using ACS AEM Tools executes the file as a script and returns the output to IntelliJ's console view.
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <ul>
+            <li>v1.0.0 - Initial release</li>
+        </ul>
+    ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="191.5000"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <configurationType
+                implementation="com.github.davidjgonzalez.intellij.aemscriptconsole.configuration.ConfigurationTypeImpl"/>
+        <programRunner
+                implementation="com.github.davidjgonzalez.intellij.aemscriptconsole.execution.ProgramRunnerImpl"/>
+    </extensions>
+</idea-plugin>

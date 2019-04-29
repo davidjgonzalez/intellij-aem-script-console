@@ -1,0 +1,11 @@
+<%@include file="/libs/foundation/global.jsp"%>
+<%@page import="org.apache.sling.api.resource.*,
+    java.util.*,
+    javax.jcr.*,
+    com.day.cq.search.*,
+    com.day.cq.wcm.api.*,
+    com.day.cq.dam.api.*"%><%
+
+    // Code here
+
+%>
