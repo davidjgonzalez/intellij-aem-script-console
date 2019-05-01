@@ -10,4 +10,4 @@ var app = {
     pageManager: request.getResourceResolver().adaptTo(Packages.com.day.cq.wcm.api.PageManager)
 };
 
-out.print( 'Hello from ' + app.resource.getPath() + '!');
+out.println( 'Hello from ' + app.resource.getPath() + '!');

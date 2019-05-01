@@ -14,8 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ScriptConsoleOutput {
-    private final static ConsoleViewContentType HEADER_CONSOLE_VIEW_TYPE = ConsoleViewContentType.LOG_VERBOSE_OUTPUT;
-
     private final static String SIMPLE_DATE_FORMAT_PATTERN = "yyyy-MM-dd h:mm:ss a";
     private final static SimpleDateFormat SDF = new SimpleDateFormat(SIMPLE_DATE_FORMAT_PATTERN);
 
@@ -51,7 +49,7 @@ public class ScriptConsoleOutput {
         final Map<ScriptConsoleOutputTemplate.Key, String> params = new HashMap<>();
 
         params.put(ScriptConsoleOutputTemplate.Key.HOST, runConfiguration.getHost());
-        params.put(ScriptConsoleOutputTemplate.Key.USER, runConfiguration.getPassword());
+        params.put(ScriptConsoleOutputTemplate.Key.USER, runConfiguration.getUser());
         params.put(ScriptConsoleOutputTemplate.Key.RESOURCE_PATH, script.getResourcePath());
         params.put(ScriptConsoleOutputTemplate.Key.START_TIME, SDF.format(this.startTime.getTime()));
         params.put(ScriptConsoleOutputTemplate.Key.END_TIME, SDF.format(this.endTime.getTime()));

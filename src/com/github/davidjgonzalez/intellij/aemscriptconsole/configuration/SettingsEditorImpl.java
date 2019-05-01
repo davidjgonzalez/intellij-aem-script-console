@@ -60,7 +60,6 @@ public class SettingsEditorImpl extends SettingsEditor<RunConfigurationImpl> {
         user.setText(StringUtils.defaultIfBlank(runConfiguration.getUser(), RUN_CONFIGURATION_USER_DEFAULT));
         password.setText(StringUtils.defaultIfBlank(runConfiguration.getPassword(), RUN_CONFIGURATION_PASSWORD_DEFAULT));
         resourcePath.setText(runConfiguration.getResourcePath());
-
     }
 
     @Override

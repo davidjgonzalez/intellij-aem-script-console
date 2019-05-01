@@ -17,13 +17,20 @@ public class ScriptConsoleScript {
     private Document document;
     private VirtualFile file;
     private String resourcePath;
+    private String scriptData;
 
     public ScriptConsoleScript(final Project project, final RunConfigurationImpl runConfiguration) {
         this.document = getDocument(project);
 
         if (this.document != null) {
             this.file = FileDocumentManager.getInstance().getFile(document);
-            parseParameters(getScriptData());
+            this.scriptData = StringUtils.defaultIfBlank(this.document != null ? this.document.getText() : null, Messages.message("script.document.empty"));
+
+            parseParameters(this.scriptData);
+
+            if ("java".equals(getExtension())) {
+                this.scriptData = processJavaServet(this.scriptData);
+            }
 
             if (resourcePath == null) {
                 resourcePath = runConfiguration.getResourcePath();
@@ -48,16 +55,12 @@ public class ScriptConsoleScript {
     }
 
     public String getScriptData() {
-        if (document != null) {
-            return StringUtils.defaultIfBlank(this.document.getText(), Messages.message("script.document.empty"));
-        } else {
-            return Messages.message("script.document.missing");
-        }
+        return scriptData;
     }
 
     private Document getDocument(Project project) {
-        FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
-        Editor selectedEditor = fileEditorManager.getSelectedTextEditor();
+        final FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
+        final Editor selectedEditor = fileEditorManager.getSelectedTextEditor();
 
         if (selectedEditor != null) {
             return selectedEditor.getDocument();
@@ -68,6 +71,22 @@ public class ScriptConsoleScript {
 
     public String getResourcePath() {
         return StringUtils.defaultIfEmpty(resourcePath, RESOURCE_PATH_DEFAULT);
+    }
+
+
+    private String processJavaServet(String scriptData) {
+        if (scriptData.matches("^\\s?package\\s+[^;]+;")) {
+            scriptData = scriptData.replaceAll("^\\s?package\\s+[^;]+;",
+                    "package apps.acs_002dtools.components.aemfiddle.fiddle;");
+        } else {
+            scriptData = "package apps.acs_002dtools.components.aemfiddle.fiddle;" +
+                    System.lineSeparator()
+                    + scriptData;
+        }
+
+        scriptData = scriptData.replaceAll("\\s?(public|protected|private)?\\s+class\\s+[a-zA-Z0-9_$]+\\s", "public class fiddle ");
+
+        return scriptData;
     }
 
     private void parseParameters(final String scriptData) {
